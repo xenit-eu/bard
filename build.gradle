@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'eu.xenit.contentcloud.scribe'
+version = '1.0.0-SNAPSHOT'
+description = 'Scribe Poet is a Java API to generate .java source code'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'com.google.truth:truth:0.39'
+    testImplementation 'com.google.testing.compile:compile-testing:0.15'
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'com.google.jimfs:jimfs:1.1'
+    testImplementation 'org.mockito:mockito-core:2.13.0'
+    testImplementation 'org.eclipse.jdt.core.compiler:ecj:4.6.1'
+}
+
+java.sourceCompatibility = 11
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

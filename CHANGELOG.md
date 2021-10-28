@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+
+ScribePoet 1.0.0 *(UNRELEASED)*
+-------------------------------
+
+* Forked JavaPoet under a new name `ScribePoet`
+* Converted build system to Gradle
+
 JavaPoet 1.13.0 *(2020-06-18)*
 -----------------------------
 
