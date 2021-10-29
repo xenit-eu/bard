@@ -163,10 +163,10 @@ final class CodeWriter {
     emit(" */\n");
   }
 
-  public void emitAnnotations(List<AnnotationSpec> annotations, boolean inline) throws IOException {
+  public void emitAnnotations(List<AnnotationSpec> annotations, boolean singleLine, boolean inlineMembers) throws IOException {
     for (AnnotationSpec annotationSpec : annotations) {
-      annotationSpec.emit(this, inline);
-      emit(inline ? " " : "\n");
+      annotationSpec.emit(this, singleLine || inlineMembers);
+      emit(singleLine ? " " : "\n");
     }
   }
 
@@ -201,7 +201,7 @@ final class CodeWriter {
     boolean firstTypeVariable = true;
     for (TypeVariableName typeVariable : typeVariables) {
       if (!firstTypeVariable) emit(", ");
-      emitAnnotations(typeVariable.annotations, true);
+      emitAnnotations(typeVariable.annotations, true, true);
       emit("$L", typeVariable.name);
       boolean firstBound = true;
       for (TypeName bound : typeVariable.bounds) {

@@ -188,7 +188,7 @@ public final class TypeSpec {
     try {
       if (enumName != null) {
         codeWriter.emitJavadoc(javadoc);
-        codeWriter.emitAnnotations(annotations, false);
+        codeWriter.emitAnnotations(annotations, false, true);
         codeWriter.emit("$L", enumName);
         if (!anonymousTypeArguments.formatParts.isEmpty()) {
           codeWriter.emit("(");
@@ -209,7 +209,7 @@ public final class TypeSpec {
         codeWriter.pushType(new TypeSpec(this));
 
         codeWriter.emitJavadoc(javadoc);
-        codeWriter.emitAnnotations(annotations, false);
+        codeWriter.emitAnnotations(annotations, false, true);
         codeWriter.emitModifiers(modifiers, Util.union(implicitModifiers, kind.asMemberModifiers));
         if (kind == Kind.ANNOTATION) {
           codeWriter.emit("$L $L", "@interface", name);
