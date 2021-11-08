@@ -2,11 +2,12 @@ Change Log
 ==========
 
 
-ScribePoet 1.0.0 *(UNRELEASED)*
+Scribe Poet 1.0.0 *(UNRELEASED)*
 -------------------------------
 
-* Forked JavaPoet under a new name `ScribePoet`
+* Forked [square/javapoet](https://github.com/square/javapoet) under a new name [xenit-eu/scribe-poet](https://github.com/xenit-eu/scribe-poet)
 * Converted build system to Gradle
+* New: Inline annotation members for fields 
 
 JavaPoet 1.13.0 *(2020-06-18)*
 -----------------------------
