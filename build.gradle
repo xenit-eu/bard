@@ -8,6 +8,8 @@ reckon {
     snapshotFromProp()
 }
 
+apply from: "${rootDir}/gradle/publish.gradle"
+
 repositories {
     mavenCentral()
 }
