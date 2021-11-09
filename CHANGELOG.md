@@ -6,6 +6,7 @@ Scribe Poet 1.0.0 *(UNRELEASED)*
 -------------------------------
 
 * Forked [square/javapoet](https://github.com/square/javapoet) under a new name [xenit-eu/scribe-poet](https://github.com/xenit-eu/scribe-poet)
+* Changed package namespace to `eu.xenit.contentcloud.scribe.poet`
 * Converted build system to Gradle
 * New: Inline annotation members for fields 
 
