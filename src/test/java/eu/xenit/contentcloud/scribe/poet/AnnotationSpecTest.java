@@ -128,7 +128,7 @@ public final class AnnotationSpecTest {
     assertThat(toString(taco)).isEqualTo(""
         + "package com.squareup.tacos;\n"
         + "\n"
-        + "import com.squareup.javapoet.AnnotationSpecTest;\n"
+        + "import eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest;\n"
         + "import java.lang.Double;\n"
         + "import java.lang.Float;\n"
         + "import java.lang.Override;\n"
@@ -160,9 +160,9 @@ public final class AnnotationSpecTest {
     AnnotationSpec annotation = AnnotationSpec.get(element.getAnnotationMirrors().get(0));
     TypeSpec.Builder typeBuilder = TypeSpec.classBuilder(IsAnnotated.class.getSimpleName());
     typeBuilder.addAnnotation(annotation);
-    JavaFile file = JavaFile.builder("com.squareup.javapoet", typeBuilder.build()).build();
+    JavaFile file = JavaFile.builder("eu.xenit.contentcloud.scribe.poet", typeBuilder.build()).build();
     assertThat(file.toString()).isEqualTo(
-        "package com.squareup.javapoet;\n"
+        "package eu.xenit.contentcloud.scribe.poet;\n"
             + "\n"
             + "import java.lang.Double;\n"
             + "import java.lang.Float;\n"
@@ -194,11 +194,11 @@ public final class AnnotationSpecTest {
     AnnotationSpec.Builder builder = AnnotationSpec.builder(HasDefaultsAnnotation.class);
     builder.addMember("n", "$L", "{}");
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation(" + "n = {}" + ")");
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation(" + "n = {}" + ")");
     builder.addMember("m", "$L", "{}");
     assertThat(builder.build().toString())
         .isEqualTo(
-            "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
+            "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
                 + "n = {}, m = {}"
                 + ")");
   }
@@ -207,38 +207,38 @@ public final class AnnotationSpecTest {
     AnnotationSpec.Builder builder = AnnotationSpec.builder(HasDefaultsAnnotation.class);
     builder.addMember("n", "$T.$L", Breakfast.class, Breakfast.PANCAKES.name());
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
-            + "n = com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
+            + "n = eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
             + ")");
 
     // builder = AnnotationSpec.builder(HasDefaultsAnnotation.class);
     builder.addMember("n", "$T.$L", Breakfast.class, Breakfast.WAFFLES.name());
     builder.addMember("n", "$T.$L", Breakfast.class, Breakfast.PANCAKES.name());
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
             + "n = {"
-            + "com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.WAFFLES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + "eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.WAFFLES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
             + "})");
 
     builder = builder.build().toBuilder(); // idempotent
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
             + "n = {"
-            + "com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.WAFFLES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + "eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.WAFFLES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
             + "})");
 
     builder.addMember("n", "$T.$L", Breakfast.class, Breakfast.WAFFLES.name());
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
             + "n = {"
-            + "com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.WAFFLES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
-            + ", com.squareup.javapoet.AnnotationSpecTest.Breakfast.WAFFLES"
+            + "eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.WAFFLES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
+            + ", eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.WAFFLES"
             + "})");
   }
 
@@ -249,14 +249,14 @@ public final class AnnotationSpecTest {
         .toBuilder();
     builder.addMember("m", "$L", 123);
     assertThat(builder.build().toString()).isEqualTo(
-        "@com.squareup.javapoet.AnnotationSpecTest.HasDefaultsAnnotation("
-            + "o = com.squareup.javapoet.AnnotationSpecTest.Breakfast.PANCAKES"
+        "@eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.HasDefaultsAnnotation("
+            + "o = eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.Breakfast.PANCAKES"
             + ", p = 1701"
             + ", f = 11.1"
             + ", m = {9, 8, 1, 123}"
             + ", l = java.lang.Override.class"
-            + ", j = @com.squareup.javapoet.AnnotationSpecTest.AnnotationA"
-            + ", q = @com.squareup.javapoet.AnnotationSpecTest.AnnotationC(\"bar\")"
+            + ", j = @eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.AnnotationA"
+            + ", q = @eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest.AnnotationC(\"bar\")"
             + ", r = {java.lang.Float.class, java.lang.Double.class}"
             + ")");
   }
@@ -270,7 +270,7 @@ public final class AnnotationSpecTest {
     assertThat(toString(taco)).isEqualTo(""
         + "package com.squareup.tacos;\n"
         + "\n"
-        + "import com.squareup.javapoet.AnnotationSpecTest;\n"
+        + "import eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest;\n"
         + "import java.lang.Double;\n"
         + "import java.lang.Float;\n"
         + "import java.lang.Override;\n"
@@ -304,7 +304,7 @@ public final class AnnotationSpecTest {
     assertThat(toString(taco)).isEqualTo(""
         + "package com.squareup.tacos;\n"
         + "\n"
-        + "import com.squareup.javapoet.AnnotationSpecTest;\n"
+        + "import eu.xenit.contentcloud.scribe.poet.AnnotationSpecTest;\n"
         + "import java.lang.Double;\n"
         + "import java.lang.Float;\n"
         + "import java.lang.Override;\n"

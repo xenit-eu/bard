@@ -837,7 +837,7 @@ public final class JavaFileTest {
         .toString();
     assertThat(source).isEqualTo("package com.squareup.tacos;\n"
         + "\n"
-        + "import com.squareup.javapoet.JavaFileTest;\n"
+        + "import eu.xenit.contentcloud.scribe.poet.JavaFileTest;\n"
         + "import other.Foo;\n"
         + "import other.NestedTypeC;\n"
         + "\n"
@@ -890,11 +890,11 @@ public final class JavaFileTest {
 
   @Test
   public void avoidClashes_parentChild_superclass_type() {
-    String source = JavaFile.builder("com.squareup.javapoet",
+    String source = JavaFile.builder("eu.xenit.contentcloud.scribe.poet",
         childTypeBuilder().superclass(Parent.class).build())
         .build()
         .toString();
-    assertThat(source).isEqualTo("package com.squareup.javapoet;\n"
+    assertThat(source).isEqualTo("package eu.xenit.contentcloud.scribe.poet;\n"
         + "\n"
         + "import java.lang.String;\n"
         + "\n"
@@ -911,11 +911,11 @@ public final class JavaFileTest {
 
   @Test
   public void avoidClashes_parentChild_superclass_typeMirror() {
-    String source = JavaFile.builder("com.squareup.javapoet",
+    String source = JavaFile.builder("eu.xenit.contentcloud.scribe.poet",
         childTypeBuilder().superclass(getElement(Parent.class).asType()).build())
         .build()
         .toString();
-    assertThat(source).isEqualTo("package com.squareup.javapoet;\n"
+    assertThat(source).isEqualTo("package eu.xenit.contentcloud.scribe.poet;\n"
         + "\n"
         + "import java.lang.String;\n"
         + "\n"
@@ -932,11 +932,11 @@ public final class JavaFileTest {
 
   @Test
   public void avoidClashes_parentChild_superinterface_type() {
-    String source = JavaFile.builder("com.squareup.javapoet",
+    String source = JavaFile.builder("eu.xenit.contentcloud.scribe.poet",
         childTypeBuilder().addSuperinterface(ParentInterface.class).build())
         .build()
         .toString();
-    assertThat(source).isEqualTo("package com.squareup.javapoet;\n"
+    assertThat(source).isEqualTo("package eu.xenit.contentcloud.scribe.poet;\n"
         + "\n"
         + "import java.lang.String;\n"
         + "import java.util.regex.Pattern;\n"
@@ -954,11 +954,11 @@ public final class JavaFileTest {
 
   @Test
   public void avoidClashes_parentChild_superinterface_typeMirror() {
-    String source = JavaFile.builder("com.squareup.javapoet",
+    String source = JavaFile.builder("eu.xenit.contentcloud.scribe.poet",
         childTypeBuilder().addSuperinterface(getElement(ParentInterface.class).asType()).build())
         .build()
         .toString();
-    assertThat(source).isEqualTo("package com.squareup.javapoet;\n"
+    assertThat(source).isEqualTo("package eu.xenit.contentcloud.scribe.poet;\n"
         + "\n"
         + "import java.lang.String;\n"
         + "import java.util.regex.Pattern;\n"
@@ -991,7 +991,7 @@ public final class JavaFileTest {
   // Regression test for case raised here: https://github.com/square/javapoet/issues/77#issuecomment-519972404
   @Test
   public void avoidClashes_mapEntry() {
-    String source = JavaFile.builder("com.squareup.javapoet",
+    String source = JavaFile.builder("eu.xenit.contentcloud.scribe.poet",
         TypeSpec.classBuilder("MapType")
             .addMethod(MethodSpec.methodBuilder("optionalString")
                 .returns(ClassName.get("com.foo", "Entry"))
@@ -1001,7 +1001,7 @@ public final class JavaFileTest {
             .build())
         .build()
         .toString();
-    assertThat(source).isEqualTo("package com.squareup.javapoet;\n"
+    assertThat(source).isEqualTo("package eu.xenit.contentcloud.scribe.poet;\n"
         + "\n"
         + "import java.util.Map;\n"
         + "\n"

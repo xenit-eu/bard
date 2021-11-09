@@ -54,7 +54,7 @@ public final class ClassNameTest {
     assertThat(ClassName.bestGuess(Map.Entry.class.getCanonicalName()))
         .isEqualTo(ClassName.get("java.util", "Map", "Entry"));
     assertThat(ClassName.bestGuess(OuterClass.InnerClass.class.getCanonicalName()))
-        .isEqualTo(ClassName.get("com.squareup.javapoet",
+        .isEqualTo(ClassName.get("eu.xenit.contentcloud.scribe.poet",
             "ClassNameTest", "OuterClass", "InnerClass"));
   }
 
@@ -107,9 +107,9 @@ public final class ClassNameTest {
     TypeElement object = elements.getTypeElement(Object.class.getCanonicalName());
     assertThat(ClassName.get(object).toString()).isEqualTo("java.lang.Object");
     TypeElement outer = elements.getTypeElement($Outer.class.getCanonicalName());
-    assertThat(ClassName.get(outer).toString()).isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer");
+    assertThat(ClassName.get(outer).toString()).isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer");
     TypeElement inner = elements.getTypeElement($Outer.$Inner.class.getCanonicalName());
-    assertThat(ClassName.get(inner).toString()).isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer.$Inner");
+    assertThat(ClassName.get(inner).toString()).isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer.$Inner");
   }
 
   /**
@@ -123,10 +123,10 @@ public final class ClassNameTest {
         .isEqualTo("java.lang.Object");
     TypeElement outer = elements.getTypeElement($Outer.class.getCanonicalName());
     assertThat(ClassName.get(preventGetKind(outer)).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer");
     TypeElement inner = elements.getTypeElement($Outer.$Inner.class.getCanonicalName());
     assertThat(ClassName.get(preventGetKind(inner)).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer.$Inner");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer.$Inner");
   }
 
   /** Returns a new instance like {@code object} that throws on {@code getKind()}. */
@@ -146,15 +146,15 @@ public final class ClassNameTest {
     assertThat(ClassName.get(Object.class).toString())
         .isEqualTo("java.lang.Object");
     assertThat(ClassName.get(OuterClass.InnerClass.class).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest.OuterClass.InnerClass");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.OuterClass.InnerClass");
     assertThat((ClassName.get(new Object() {}.getClass())).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest$1");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest$1");
     assertThat((ClassName.get(new Object() { Object inner = new Object() {}; }.inner.getClass())).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest$2$1");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest$2$1");
     assertThat((ClassName.get($Outer.class)).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer");
     assertThat((ClassName.get($Outer.$Inner.class)).toString())
-        .isEqualTo("com.squareup.javapoet.ClassNameTest.$Outer.$Inner");
+        .isEqualTo("eu.xenit.contentcloud.scribe.poet.ClassNameTest.$Outer.$Inner");
   }
 
   @Test public void peerClass() {

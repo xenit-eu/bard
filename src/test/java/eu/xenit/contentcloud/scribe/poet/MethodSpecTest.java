@@ -224,7 +224,7 @@ public final class MethodSpecTest {
       fail();
     } catch (IllegalArgumentException expected) {
       assertThat(expected).hasMessageThat().isEqualTo(
-          "Cannot override method on final class com.squareup.javapoet.MethodSpecTest.FinalClass");
+          "Cannot override method on final class eu.xenit.contentcloud.scribe.poet.MethodSpecTest.FinalClass");
     }
   }
 
@@ -261,7 +261,7 @@ public final class MethodSpecTest {
   @Test public void overrideDoesNotCopyParameterAnnotations() {
     TypeElement abstractTypeElement = getElement(AbstractClassWithPrivateAnnotation.class);
     ExecutableElement fooElement = ElementFilter.methodsIn(abstractTypeElement.getEnclosedElements()).get(0);
-    ClassName implClassName = ClassName.get("com.squareup.javapoet", "Impl");
+    ClassName implClassName = ClassName.get("eu.xenit.contentcloud.scribe.poet", "Impl");
     TypeSpec type = TypeSpec.classBuilder(implClassName)
             .superclass(abstractTypeElement.asType())
             .addMethod(MethodSpec.overriding(fooElement).build())
