@@ -24,7 +24,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Publish
-        if: ${{ github.ref == 'refs/heads/main' || startswith(github.ref, 'refs/tags/') }}
+        if: ${{ (github.ref == 'refs/heads/main' || startswith(github.ref, 'refs/tags/')) && matrix.java-version == '11' }}
         run: ./gradlew publish
         env:
           SIGNING_PRIVATE_KEY: ${{ secrets.MAVEN_CENTRAL_GPG_KEY }}
