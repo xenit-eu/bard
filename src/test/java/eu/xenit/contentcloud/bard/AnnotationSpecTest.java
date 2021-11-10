@@ -293,37 +293,6 @@ public final class AnnotationSpecTest {
         + ")\n"
         + "class Taco {\n"
         + "}\n");
-
-    System.out.println(""
-            + "package com.squareup.tacos;\n"
-            + "\n"
-            + "import com.squareup.javapoet.AnnotationSpecTest;\n"
-            + "import java.lang.Double;\n"
-            + "import java.lang.Float;\n"
-            + "import java.lang.Override;\n"
-            + "\n"
-            + "@AnnotationSpecTest.HasDefaultsAnnotation("
-            + "a = 5, "
-            + "b = 6, "
-            + "c = 7, "
-            + "d = 8, "
-            + "e = 9.0f, "
-            + "f = 11.1, "
-            + "g = {'\\u0000', '쫾', 'z', '€', 'ℕ', '\"', '\\'', '\\t', '\\n'}, "
-            + "h = true, "
-            + "i = AnnotationSpecTest.Breakfast.WAFFLES, "
-            + "j = @AnnotationSpecTest.AnnotationA, "
-            + "k = \"maple\", "
-            + "l = Override.class, "
-            + "m = {9, 8, 1}, "
-            + "n = {AnnotationSpecTest.Breakfast.WAFFLES, AnnotationSpecTest.Breakfast.PANCAKES}, "
-            + "o = AnnotationSpecTest.Breakfast.PANCAKES, "
-            + "p = 1701, "
-            + "q = @AnnotationSpecTest.AnnotationC(\"bar\"), "
-            + "r = {Float.class, Double.class}"
-            + ")\n"
-            + "class Taco {\n"
-            + "}\n");
   }
 
   @Test public void disallowsNullMemberName() {
