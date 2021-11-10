@@ -50,7 +50,7 @@ import javax.lang.model.util.SimpleTypeVisitor8;
  * <p>Instances of this class are immutable value objects that implement {@code equals()} and {@code
  * hashCode()} properly.
  *
- * <h3>Referencing existing types</h3>
+ * <h2>Referencing existing types</h2>
  *
  * <p>Primitives and void are constants that you can reference directly: see {@link #INT}, {@link
  * #DOUBLE}, and {@link #VOID}.
