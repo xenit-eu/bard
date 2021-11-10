@@ -16,7 +16,7 @@
 
 import static com.google.common.truth.Truth.assertThat;
 
-import eu.xenit.contentcloud.scribe.poet.ClassName;
+import eu.xenit.contentcloud.bard.ClassName;
 import org.junit.Test;
 
 /**

@@ -9,20 +9,20 @@ publishing {
 
         all {
             pom {
-                url = 'https://github.com/xenit-eu/scribe-poet'
-                name = 'scribe-poet'
+                url = 'https://github.com/xenit-eu/bard'
+                name = project.name
                 description = project.description
 
                 scm {
-                    connection = 'scm:git:git@github.com:xenit-eu/scribe-poet.git'
-                    developerConnection = 'scm:git:git@github.com:xenit-eu/scribe-poet.git'
-                    url = 'https://github.com/xenit-eu/scribe-poet.git'
+                    connection = 'scm:git:git@github.com:xenit-eu/bard.git'
+                    developerConnection = 'scm:git:git@github.com:xenit-eu/bard.git'
+                    url = 'https://github.com/xenit-eu/bard.git'
                 }
 
                 developers {
                     developer {
-                        id = "xenit"
-                        name = "Xenit Solutions NV"
+                        name = "XeniT"
+                        organization = "Xenit Solutions NV"
                     }
                 }
 
