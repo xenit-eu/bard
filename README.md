@@ -1,7 +1,31 @@
-JavaPoet
-========
+# Bard
 
-`JavaPoet` is a Java API for generating `.java` source files.
+[![build](https://github.com/xenit-eu/bard/workflows/build/badge.svg?branch=main)](https://github.com/xenit-eu/thunx/actions/workflows/ci.yml)
+[![Apache License 2](https://img.shields.io/github/license/xenit-eu/bard?color=blue)](LICENSE)
+
+`Bard` is a Java API for generating `.java` source files, forked from [square/javapoet][javapoet].
+
+Its primary purpose is to serve as the java sourcecode generator for [xenit-eu/contentcloud-scribe][scribe].
+
+## Installation
+
+With Maven:
+```xml
+<dependency>
+  <groupId>eu.xenit.contentcloud.bard</groupId>
+  <artifactId>bard</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+</dependency>
+```
+
+or Gradle:
+```groovy
+compile 'eu.xenit.contentcloud.bard:0.1.0-SNAPSHOT'
+```
+
+Snapshots of the development version are available in [Sonatype's `snapshots` repository][snapshot].
+
+---
 
 Source file generation can be useful when doing things such as annotation processing or interacting
 with metadata files (e.g., database schemas, protocol formats). By generating code, you eliminate
@@ -17,19 +41,19 @@ package com.example.helloworld;
 
 public final class HelloWorld {
   public static void main(String[] args) {
-    System.out.println("Hello, JavaPoet!");
+    System.out.println("Hello, Bard!");
   }
 }
 ```
 
-And this is the (exciting) code to generate it with JavaPoet:
+And this is the (exciting) code to generate it with Bard:
 
 ```java
 MethodSpec main = MethodSpec.methodBuilder("main")
     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
     .returns(void.class)
     .addParameter(String[].class, "args")
-    .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
+    .addStatement("$T.out.println($S)", System.class, "Hello, Bard!")
     .build();
 
 TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld")
@@ -50,17 +74,17 @@ that to a `HelloWorld.java` file.
 In this case we write the file to `System.out`, but we could also get it as a string
 (`JavaFile.toString()`) or write it to the file system (`JavaFile.writeTo()`).
 
-The [Javadoc][javadoc] catalogs the complete JavaPoet API, which we explore below.
+The [Javadoc][javadoc] catalogs the complete Bard API, which we explore below.
 
 ### Code & Control Flow
 
-Most of JavaPoet's API uses plain old immutable Java objects. There's also builders, method chaining
-and varargs to make the API friendly. JavaPoet offers models for classes & interfaces (`TypeSpec`),
+Most of Bard's API uses plain old immutable Java objects. There's also builders, method chaining
+and varargs to make the API friendly. Bard offers models for classes & interfaces (`TypeSpec`),
 fields (`FieldSpec`), methods & constructors (`MethodSpec`), parameters (`ParameterSpec`) and
 annotations (`AnnotationSpec`).
 
 But the _body_ of methods and constructors is not modeled. There's no expression class, no
-statement class or syntax tree nodes. Instead, JavaPoet uses strings for code blocks:
+statement class or syntax tree nodes. Instead, Bard uses strings for code blocks:
 
 ```java
 MethodSpec main = MethodSpec.methodBuilder("main")
@@ -83,7 +107,7 @@ void main() {
 }
 ```
 
-The manual semicolons, line wrapping, and indentation are tedious and so JavaPoet offers APIs to
+The manual semicolons, line wrapping, and indentation are tedious and so Bard offers APIs to
 make it easier. There's `addStatement()` which takes care of semicolons and newline, and
 `beginControlFlow()` + `endControlFlow()` which are used together for braces, newlines, and
 indentation:
@@ -125,7 +149,7 @@ int multiply10to20() {
 }
 ```
 
-Methods generating methods! And since JavaPoet generates source instead of bytecode, you can
+Methods generating methods! And since Bard generates source instead of bytecode, you can
 read through it to make sure it's right.
 
 Some control flow statements, such as `if/else`, can have unlimited control flow possibilities.
@@ -186,7 +210,7 @@ void main() {
 ### $L for Literals
 
 The string-concatenation in calls to `beginControlFlow()` and `addStatement` is distracting. Too
-many operators. To address this, JavaPoet offers a syntax inspired-by but incompatible-with
+many operators. To address this, Bard offers a syntax inspired-by but incompatible-with
 [`String.format()`][formatter]. It accepts **`$L`** to emit a **literal** value in the output. This
 works just like `Formatter`'s `%s`:
 
@@ -204,7 +228,7 @@ private MethodSpec computeRange(String name, int from, int to, String op) {
 ```
 
 Literals are emitted directly to the output code with no escaping. Arguments for literals may be
-strings, primitives, and a few JavaPoet types described below.
+strings, primitives, and a few Bard types described below.
 
 ### $S for Strings
 
@@ -255,7 +279,7 @@ public final class HelloWorld {
 
 ### $T for Types
 
-We Java programmers love our types: they make our code easier to understand. And JavaPoet is on
+We Java programmers love our types: they make our code easier to understand. And Bard is on
 board. It has rich built-in support for types, including automatic generation of `import`
 statements. Just use **`$T`** to reference **types**:
 
@@ -317,9 +341,9 @@ public final class HelloWorld {
 }
 ```
 
-The `ClassName` type is very important, and you'll need it frequently when you're using JavaPoet.
+The `ClassName` type is very important, and you'll need it frequently when you're using Bard.
 It can identify any _declared_ class. Declared types are just the beginning of Java's rich type
-system: we also have arrays, parameterized types, wildcard types, and type variables. JavaPoet has
+system: we also have arrays, parameterized types, wildcard types, and type variables. Bard has
 classes for building each of these:
 
 ```java
@@ -338,7 +362,7 @@ MethodSpec beyond = MethodSpec.methodBuilder("beyond")
     .build();
 ```
 
-JavaPoet will decompose each type and import its components where possible.
+Bard will decompose each type and import its components where possible.
 
 ```java
 package com.example.helloworld;
@@ -360,7 +384,7 @@ public final class HelloWorld {
 
 #### Import static
 
-JavaPoet supports `import static`. It does it via explicitly collecting type member names. Let's
+Bard supports `import static`. It does it via explicitly collecting type member names. Let's
 enhance the previous example with some static sugar:
 
 ```java
@@ -388,7 +412,7 @@ JavaFile.builder("com.example.helloworld", hello)
     .build();
 ```
 
-JavaPoet will first add your `import static` block to the file as configured, match and mangle
+Bard will first add your `import static` block to the file as configured, match and mangle
 all calls accordingly and also import all other types as needed.
 
 ```java
@@ -512,7 +536,7 @@ public abstract class HelloWorld {
 }
 ```
 
-The other modifiers work where permitted. Note that when specifying modifiers, JavaPoet uses
+The other modifiers work where permitted. Note that when specifying modifiers, Bard uses
 [`javax.lang.model.element.Modifier`][modifier], a class that is not available on Android. This
 limitation applies to code-generating-code only; the output code runs everywhere: JVMs, Android,
 and GWT.
@@ -550,7 +574,7 @@ public class HelloWorld {
 }
 ```
 
-For the most part, constructors work just like methods. When emitting code, JavaPoet will place
+For the most part, constructors work just like methods. When emitting code, Bard will place
 constructors before methods in the output file.
 
 ### Parameters
@@ -624,7 +648,7 @@ private final String android = "Lollipop v." + 5.0;
 
 ### Interfaces
 
-JavaPoet has no trouble with interfaces. Note that interface methods must always be `PUBLIC
+Bard has no trouble with interfaces. Note that interface methods must always be `PUBLIC
 ABSTRACT` and interface fields must always be `PUBLIC STATIC FINAL`. These modifiers are necessary
 when defining the interface:
 
@@ -767,7 +791,7 @@ void sortByLength(List<String> strings) {
 
 One particularly tricky part of defining anonymous inner classes is the arguments to the superclass
 constructor. In the above code we're passing the empty string for no arguments:
-`TypeSpec.anonymousClassBuilder("")`. To pass different parameters use JavaPoet's code block
+`TypeSpec.anonymousClassBuilder("")`. To pass different parameters use Bard's code block
 syntax with commas to separate arguments.
 
 
@@ -884,60 +908,25 @@ Which generates this:
 
 Use `$T` when referencing types in Javadoc to get automatic imports.
 
-Download
---------
 
-Download [the latest .jar][dl] or depend via Maven:
-```xml
-<dependency>
-  <groupId>com.squareup</groupId>
-  <artifactId>javapoet</artifactId>
-  <version>1.13.0</version>
-</dependency>
-```
-or Gradle:
-```groovy
-compile 'com.squareup:javapoet:1.13.0'
-```
+# JavaPoet & JavaWriter
 
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
+Bard is a fork of [JavaPoet][javapoet]. It's the java sourcecode generator library used in [xenit-eu/contentcloud-scribe][scribe]
 
-
-
-License
--------
-
-    Copyright 2015 Square, Inc.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-
-
-JavaWriter
-==========
+The main reason for forking JavaPoet is to have more control over the layout of the generated code. See [#658] for example.
+There are some straight forward progress possible, when you can break the original JavaPoet API.
+The upstream project is reluctant to do this - rightfully so.
 
 JavaPoet is the successor to [JavaWriter][javawriter]. New projects should prefer JavaPoet because
 it has a stronger code model: it understands types and can manage imports automatically. JavaPoet is
 also better suited to composition: rather than streaming the contents of a `.java` file
 top-to-bottom in a single pass, a file can be assembled as a tree of declarations.
 
-JavaWriter continues to be available in [GitHub][javawriter] and [Maven Central][javawriter_maven].
-
-
- [dl]: https://search.maven.org/remote_content?g=com.squareup&a=javapoet&v=LATEST
- [snap]: https://oss.sonatype.org/content/repositories/snapshots/com/squareup/javapoet/
+ [javapoet]: https://github.com/square/javapoet
+ [scribe]: https://github.com/xenit-eu/contentcloud-scribe
+ [#658]: https://github.com/square/javapoet/issues/658
+ [snapshot]: https://oss.sonatype.org/content/repositories/snapshots/com/squareup/javapoet/
  [javadoc]: https://square.github.io/javapoet/1.x/javapoet/
  [javawriter]: https://github.com/square/javapoet/tree/javawriter_2
- [javawriter_maven]: https://search.maven.org/#artifactdetails%7Ccom.squareup%7Cjavawriter%7C2.5.1%7Cjar
  [formatter]: https://developer.android.com/reference/java/util/Formatter.html
  [modifier]: https://docs.oracle.com/javase/8/docs/api/javax/lang/model/element/Modifier.html
