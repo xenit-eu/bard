@@ -328,4 +328,27 @@ public final class AnnotationSpecTest {
   private String toString(TypeSpec typeSpec) {
     return JavaFile.builder("com.squareup.tacos", typeSpec).build().toString();
   }
+
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface SubAnnotation {
+    String name() default "foo";
+  }
+
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface HasSubAnnotations {
+    SubAnnotation[] value();
+  }
+
+  @Test public void arrayOfAnnotations() {
+    AnnotationSpec.Builder builder = AnnotationSpec.builder(HasSubAnnotations.class);
+    builder.addMember("value", "$L", AnnotationSpec.builder(SubAnnotation.class).addMember("name", "$S", "bar").build());
+    builder.addMember("value", "$L", AnnotationSpec.builder(SubAnnotation.class).addMember("name", "$S", "baz").build());
+    builder.addMember("value", "$L", AnnotationSpec.builder(SubAnnotation.class).addMember("name", "$S", "baq").build());
+    assertThat(builder.build().toString()).isEqualTo(
+            "@eu.xenit.contentcloud.bard.AnnotationSpecTest.HasSubAnnotations({\n"
+                    + "    @eu.xenit.contentcloud.bard.AnnotationSpecTest.SubAnnotation(name = \"bar\"),\n"
+                    + "    @eu.xenit.contentcloud.bard.AnnotationSpecTest.SubAnnotation(name = \"baz\"),\n"
+                    + "    @eu.xenit.contentcloud.bard.AnnotationSpecTest.SubAnnotation(name = \"baq\")\n"
+                    + "})");
+  }
 }
