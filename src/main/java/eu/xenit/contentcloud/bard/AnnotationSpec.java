@@ -59,7 +59,12 @@ public final class AnnotationSpec {
     } else if (members.size() == 1 && members.containsKey("value")) {
       // @Named("foo")
       codeWriter.emit("@$T(", type);
-      emitAnnotationValues(codeWriter, whitespace, memberSeparator, members.get("value"));
+      if (hasOnlyAnnotations(members.get("value"))) {
+        // override inlining logic when emitting annotation that wraps array of annotations
+        emitAnnotationValues(codeWriter, "\n", ",\n", members.get("value"));
+      } else {
+        emitAnnotationValues(codeWriter, whitespace, memberSeparator, members.get("value"));
+      }
       codeWriter.emit(")");
     } else {
       // Inline:
@@ -82,6 +87,10 @@ public final class AnnotationSpec {
       codeWriter.unindent(2);
       codeWriter.emit(whitespace + ")");
     }
+  }
+
+  private boolean hasOnlyAnnotations(List<CodeBlock> blocks) {
+    return blocks.stream().allMatch(b -> b.toString().trim().startsWith("@"));
   }
 
   private void emitAnnotationValues(CodeWriter codeWriter, String whitespace,
