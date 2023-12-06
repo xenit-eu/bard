@@ -40,6 +40,7 @@ publishing {
     repositories {
         if (version.version.isSignificant()) {
             sonatypeMavenCentral {
+                url = "https://s01.oss.sonatype.org/service/local/"
                 credentials {
                     username = project.findProperty('sonatype_username')
                     password = project.findProperty('sonatype_password')
@@ -47,6 +48,7 @@ publishing {
             }
         } else {
             sonatypeSnapshots {
+                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 credentials {
                     username = project.findProperty('sonatype_username')
                     password = project.findProperty('sonatype_password')
