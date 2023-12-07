@@ -3,5 +3,5 @@
   "extends": [
     "github>xenit-eu/contentgrid-renovate-presets:renovate.json"
   ],
-  "includeForks": true
+  "forkProcessing": "enabled"
 }
