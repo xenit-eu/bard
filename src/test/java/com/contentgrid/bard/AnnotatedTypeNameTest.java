@@ -196,8 +196,7 @@ public class AnnotatedTypeNameTest {
         .varargs()
         .build();
     assertThat(varargsMethod.toString()).isEqualTo(""
-        + "void m(\n"
-        + "    java.lang.Object @" + TUA + " []... p) {\n"
+        + "void m(java.lang.Object @" + TUA + " []... p) {\n"
         + "}\n");
   }
 
@@ -213,8 +212,7 @@ public class AnnotatedTypeNameTest {
         .build();
 
     assertThat(varargsMethod.toString()).isEqualTo(""
-            + "void m(\n"
-            + "    java.lang.Object[] @" + TUA + " ... p) {\n"
+            + "void m(java.lang.Object[] @" + TUA + " ... p) {\n"
             + "}\n");
   }
 }
