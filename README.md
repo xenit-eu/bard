@@ -5,14 +5,14 @@
 
 `Bard` is a Java API for generating `.java` source files, forked from [square/javapoet][javapoet].
 
-Its primary purpose is to serve as the java sourcecode generator for [xenit-eu/contentcloud-scribe][scribe].
+Its primary purpose is to serve as the java sourcecode generator for [xenit-eu/contentgrid-scribe][scribe].
 
 ## Installation
 
 With Maven:
 ```xml
 <dependency>
-  <groupId>eu.xenit.contentcloud.bard</groupId>
+  <groupId>com.contentgrid.bard</groupId>
   <artifactId>bard</artifactId>
   <version>0.1.0-SNAPSHOT</version>
 </dependency>
@@ -20,7 +20,7 @@ With Maven:
 
 or Gradle:
 ```groovy
-compile 'eu.xenit.contentcloud.bard:0.1.0-SNAPSHOT'
+compile 'com.contentgrid.bard:0.1.0-SNAPSHOT'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snapshot].
@@ -911,7 +911,7 @@ Use `$T` when referencing types in Javadoc to get automatic imports.
 
 # JavaPoet & JavaWriter
 
-Bard is a fork of [JavaPoet][javapoet]. It's the java sourcecode generator library used in [xenit-eu/contentcloud-scribe][scribe]
+Bard is a fork of [JavaPoet][javapoet]. It's the java sourcecode generator library used in [xenit-eu/contentgrid-scribe][scribe]
 
 The main reason for forking JavaPoet is to have more control over the layout of the generated code. See [#658] for example.
 There are some straight forward progress possible, when you can break the original JavaPoet API.
@@ -923,7 +923,7 @@ also better suited to composition: rather than streaming the contents of a `.jav
 top-to-bottom in a single pass, a file can be assembled as a tree of declarations.
 
  [javapoet]: https://github.com/square/javapoet
- [scribe]: https://github.com/xenit-eu/contentcloud-scribe
+ [scribe]: https://github.com/xenit-eu/contentgrid-scribe
  [#658]: https://github.com/square/javapoet/issues/658
  [snapshot]: https://oss.sonatype.org/content/repositories/snapshots/com/squareup/javapoet/
  [javadoc]: https://square.github.io/javapoet/1.x/javapoet/

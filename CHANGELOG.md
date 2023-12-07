@@ -10,6 +10,8 @@ Bard 1.0.0 *(UNRELEASED)*
 * Converted build system to Gradle
 * New: Inline annotation members for fields 
 * New: Supports JDK 11 (baseline) & JDK 17
+* Override whitespace for nested annotations
+* Changed package namespace to `com.contentgrid.bard`
 
 JavaPoet 1.13.0 *(2020-06-18)*
 -----------------------------
