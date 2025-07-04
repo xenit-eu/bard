@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
 }
 
+apply from: "${rootDir}/gradle/jreleaser.gradle"
 apply from: "${rootDir}/gradle/publish.gradle"
 
 repositories {
