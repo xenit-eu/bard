@@ -1,26 +1,16 @@
-name: build
-
 on:
   push:
   pull_request:
 
 jobs:
   build:
-    name: build
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        java-version:
-          - 11
-          - 17
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          distribution: zulu
-          java-version: ${{ matrix.java-version }}
+          distribution: liberica
+          java-version: 17
       - name: Build with Gradle
         run: ./gradlew build
       - name: Publish
@@ -29,5 +19,5 @@ jobs:
         env:
           SIGNING_PRIVATE_KEY: ${{ secrets.MAVEN_CENTRAL_GPG_KEY }}
           SIGNING_PASSWORD: ${{ secrets.MAVEN_CENTRAL_GPG_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatype_username: ${{ secrets.SONATYPE_S01_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatype_password: ${{ secrets.SONATYPE_S01_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralPublishUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPublishPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
