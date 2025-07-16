@@ -18,7 +18,6 @@ package com.contentgrid.bard;
 import com.google.testing.compile.CompilationRule;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -106,7 +105,7 @@ public class ParameterSpecTest {
   }
 
   final class VariableElementParameterClass {
-    public void foo(@Nullable final String bar) {
+    public void foo(final String bar) {
     }
   }
 
